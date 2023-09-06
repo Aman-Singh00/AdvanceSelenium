@@ -1,13 +1,11 @@
-package Practice.OrgTest;
+package Practice.ContactTest;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.Random;
 
-import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -19,11 +17,10 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
-public class CreateOrgWithPhoneNoTest {
+public class CreateContactTest {
 
 	@Test
-	public void create() throws EncryptedDocumentException, IOException {
-
+	public void contact() throws IOException {
 		// fetching the common data from excel file
 		FileInputStream fis = new FileInputStream("E:\\data\\CommanData.properties");
 		Properties pobj = new Properties();
@@ -40,12 +37,10 @@ public class CreateOrgWithPhoneNoTest {
 		// fetching the organization name from excel file
 		FileInputStream stream = new FileInputStream("E:\\data\\Book1.xlsx");
 		Workbook book = WorkbookFactory.create(stream);
-		Sheet sheet = book.getSheet("Org");
-		Row row = sheet.getRow(7);
-		String OrgName = row.getCell(2).toString() + randomNum;
-		String PhoneNo = row.getCell(3).toString();
-		System.out.println(OrgName);
-		System.out.println(PhoneNo);
+		Sheet sheet = book.getSheet("Contact");
+		Row row = sheet.getRow(1);
+		String Last_Name = row.getCell(2).toString() + randomNum;
+		System.out.println(Last_Name);
 
 		WebDriver driver = null;
 
@@ -67,34 +62,31 @@ public class CreateOrgWithPhoneNoTest {
 		driver.findElement(By.name("user_password")).sendKeys(password);
 		driver.findElement(By.id("submitButton")).click();
 
-		// clicking on organization
-		driver.findElement(By.linkText("Organizations")).click();
-		driver.findElement(By.xpath("//img[@title=\"Create Organization...\"]")).click();
-		driver.findElement(By.name("accountname")).sendKeys(OrgName);
-		
-		driver.findElement(By.xpath("//input[@id='phone']")).sendKeys(PhoneNo);
+		// clicking on contact button
+		driver.findElement(By.xpath("(//a[text()='Contacts'])[1]")).click();
 
-		driver.findElement(By.className("crmbutton")).click();
+		// clicking on create new button
+		driver.findElement(By.xpath("//img[@title='Create Contact...']")).click();
 
-		// verifying the organization name
-		String actualOrgName = driver.findElement(By.id("dtlview_Organization Name")).getText();
+		// enter the data into last name
+		driver.findElement(By.xpath("//input[@name='lastname']")).sendKeys(Last_Name);
 
-		if (actualOrgName.equals(OrgName)) {
-			System.out.println(OrgName + " Verified successfully");
+		// click on save button
+		driver.findElement(By.xpath("//input[contains(@class,'crmButton')]")).click();
+
+		// verify the last name
+
+		String ActualLastName = driver.findElement(By.xpath("//span[@id='dtlview_Last Name']")).getText();
+		System.out.println(ActualLastName);
+
+		if (ActualLastName.equals(Last_Name)) {
+			System.out.println(Last_Name + " verified successfully");
 		} else {
-			System.out.println(OrgName + " Not Verified successfully");
+			System.out.println(Last_Name + " not Verified successfully");
 		}
 		
-		String actualPhoneNo = driver.findElement(By.xpath("//span[@id='dtlview_Phone']")).getText();
-		
-		if (actualPhoneNo.equals(PhoneNo)) {
-			System.out.println(PhoneNo + " Verified successfully");
-		} else {
-			System.out.println(PhoneNo + " Not Verified successfully");
-		}
-	
-
 		driver.quit();
+
 	}
 
 }
