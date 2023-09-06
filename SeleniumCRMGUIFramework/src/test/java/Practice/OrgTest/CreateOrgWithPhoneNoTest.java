@@ -35,7 +35,7 @@ public class CreateOrgWithPhoneNoTest {
 
 		// Random number
 		Random rn = new Random();
-		int randomNum = rn.nextInt(1000);
+		int randomNum = rn.nextInt(10000);
 
 		// fetching the organization name from excel file
 		FileInputStream stream = new FileInputStream("E:\\data\\Book1.xlsx");
