@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-09-04T18:15:08 IST" name="Default suite" finished-at="2023-09-04T18:15:09 IST" duration-ms="686">
+  <suite started-at="2023-09-06T10:22:54 IST" name="Default suite" finished-at="2023-09-06T10:23:29 IST" duration-ms="34453">
     <groups>
     </groups>
-    <test started-at="2023-09-04T18:15:08 IST" name="Default test" finished-at="2023-09-04T18:15:09 IST" duration-ms="686">
-      <class name="com.PractiseDataDrivenTesting.demo">
-        <test-method signature="testing()[pri:0, instance:com.PractiseDataDrivenTesting.demo@78123e82]" started-at="2023-09-04T18:15:08 IST" name="testing" finished-at="2023-09-04T18:15:09 IST" duration-ms="639" status="PASS">
+    <test started-at="2023-09-06T10:22:54 IST" name="Default test" finished-at="2023-09-06T10:23:29 IST" duration-ms="34453">
+      <class name="Practice.OrgTest.CreateOrgTest">
+        <test-method signature="org()[pri:0, instance:Practice.OrgTest.CreateOrgTest@16a0ee18]" started-at="2023-09-06T10:22:54 IST" name="org" finished-at="2023-09-06T10:23:29 IST" duration-ms="34376" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testing -->
-      </class> <!-- com.PractiseDataDrivenTesting.demo -->
+        </test-method> <!-- org -->
+      </class> <!-- Practice.OrgTest.CreateOrgTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
