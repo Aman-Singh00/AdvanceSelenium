@@ -3,9 +3,7 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="Practice.OrgTest.CreateOrgTest"/>
-      <class name="Practice.OrgTest.CreateOrgWithIndustryTest"/>
-      <class name="Practice.OrgTest.CreateOrgWithPhoneNoTest"/>
+      <class name="com.comcast.organization.CreateOrgTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

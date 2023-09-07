@@ -9,13 +9,13 @@ import org.openqa.selenium.support.PageFactory;
  * @author Aman
  *
  */
-public class ConatctPage {
+public class ContactPage {
 	  
 	WebDriver driver;
-	 public ConatctPage(WebDriver driver) {           
+	 public ContactPage(WebDriver driver) {           
 		 this.driver = driver;
 		 
-		 PageFactory.initElements(driver, ConatctPage.class);
+		 PageFactory.initElements(driver,this);
 	 }
 	
 	 

@@ -27,31 +27,31 @@ import com.comcast.crm.objectrepositoryutility.HomePage;
 import com.comcast.crm.objectrepositoryutility.LoginPage;
 
 public class BaseClass {
-	
-	
+
+
 	/* Create Object */
 	public DataBaseUtility dbLib = new DataBaseUtility();
 	public FileUtility fLib = new FileUtility();
-	public ExcelUtility eLib = new ExcelUtility();
+	public ExcelUtility excel = new ExcelUtility();
 	public JavaUtility jLib = new JavaUtility();
-	public  WebDriver driver = null;
-	public  static WebDriver sdriver = null;
+	public  WebDriver driver;
+	public  static WebDriver sdriver;
 
 
-	
-		@BeforeSuite(groups = {"smokeTest", "regressionTest"})
-		public void configBS() throws SQLException {
-			System.out.println("===Connect to DB , Report Config===");
-			dbLib.getDbconnection();
-		}
-		
-		
-        //@Parameters ("BROWSER")
-	    @BeforeClass(groups = {"smokeTest", "regressionTest"})
-	    public void configBC() throws Throwable {
-	    System.out.println("==Launch the BROWSER==");
-	   String BROWSER	= fLib.getDataFromPropertiesFile("browser");
-	    //String BROWSER = System.getProperty("browser" , fLib.getDataFromPropertiesFile("browser"));
+
+	@BeforeSuite(alwaysRun = true)
+	public void configBS() throws SQLException {
+		System.out.println("===Connect to DB , Report Config===");
+		dbLib.getDbconnection();
+	}
+
+
+	//@Parameters("Browser")
+	@BeforeClass(alwaysRun = true)
+	public void configBC() throws Throwable {
+		System.out.println("==Launch the BROWSER==");
+		String BROWSER	= fLib.getDataFromPropertiesFile("browser");
+		//String BROWSER = System.getProperty("browser" , fLib.getDataFromPropertiesFile("browser"));
 		if(BROWSER.equals("chrome")) {
 			driver = new ChromeDriver();
 		}else if(BROWSER.equals("firefox")) {
@@ -63,46 +63,47 @@ public class BaseClass {
 		}
 		sdriver = driver;
 		UtilityClassObject.setDriver(driver);
-	    }
-	    
-	    @BeforeMethod(groups = {"smokeTest", "regressionTest"})
-		public void configBM() throws Throwable {
-			System.out.println("=login=");
-			//String URL	= fLib.getDataFromPropertiesFile("url");
-			//String USERNAME	= fLib.getDataFromPropertiesFile("username");
-			//String PASSWORD	= fLib.getDataFromPropertiesFile("password");
-			String URL = System.getProperty("url" ,fLib.getDataFromPropertiesFile("url") );
-			String USERNAME = System.getProperty("username" , fLib.getDataFromPropertiesFile("username"));
-			String PASSWORD = System.getProperty("password" , fLib.getDataFromPropertiesFile("password"));
-			LoginPage lp = new LoginPage(driver);
-			lp.loginToapp(URL, USERNAME, PASSWORD);
-		}
-	    
-	    
-		@AfterMethod(groups = {"smokeTest", "regressionTest"})
-		public void configAM() {
-			System.out.println("=logout=");
-			HomePage hp = new HomePage(driver);
-			hp.logout();
-		}
-		
-	    
-	    @AfterClass(groups = {"smokeTest", "regressionTest"})
-	    public void configAC() {
-	    	System.out.println("==Close the BROWSER==");
-	        driver.quit();
-	    }
-	    
-	   @AfterSuite(groups = {"smokeTest", "regressionTest"})
-		public void configAS() throws SQLException {
-			System.out.println("===close Db , Report backUP====");
-			dbLib.closeDbconnection();
-			
-		}
-	  
-	
-	   
-	    
+		//driver.manage().window().maximize();
+	}
+
+	@BeforeMethod(alwaysRun = true)
+	public void configBM() throws Throwable {
+		System.out.println("=login=");
+		//String URL	= fLib.getDataFromPropertiesFile("url");
+		//String USERNAME	= fLib.getDataFromPropertiesFile("username");
+		//String PASSWORD	= fLib.getDataFromPropertiesFile("password");
+		String URL = System.getProperty("url" ,fLib.getDataFromPropertiesFile("url") );
+		String USERNAME = System.getProperty("username" , fLib.getDataFromPropertiesFile("username"));
+		String PASSWORD = System.getProperty("password" , fLib.getDataFromPropertiesFile("password"));
+		LoginPage lp = new LoginPage(driver);
+		lp.loginToapp(URL, USERNAME, PASSWORD);
+	}
+
+
+	@AfterMethod(alwaysRun = true)
+	public void configAM() {
+		System.out.println("=logout=");
+		HomePage hp = new HomePage(driver);
+		hp.logout();
+	}
+
+
+	@AfterClass(alwaysRun = true)
+	public void configAC() {
+		System.out.println("==Close the BROWSER==");
+		driver.quit();
+	}
+
+	@AfterSuite(alwaysRun = true)
+	public void configAS() throws SQLException {
+		System.out.println("===close Db , Report backUP====");
+		dbLib.closeDbconnection();
+
+	}
+
+
+
+
 
 
 }
